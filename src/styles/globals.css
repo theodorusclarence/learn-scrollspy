@@ -3,6 +3,10 @@
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   /* inter var - latin */
   @font-face {
     font-family: 'Inter';
@@ -38,10 +42,10 @@
 
   .layout {
     /* 750px */
-    /* max-width: 43.75rem; */
+    max-width: 50rem;
 
     /* 1100px */
-    max-width: 68.75rem;
+    /* max-width: 68.75rem; */
     @apply w-11/12 mx-auto;
   }
 }
