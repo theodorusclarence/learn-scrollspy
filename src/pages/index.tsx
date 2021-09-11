@@ -1,55 +1,45 @@
+import clsx from 'clsx';
 import * as React from 'react';
 
-import ButtonLink from '@/components/links/ButtonLink';
-import CustomLink from '@/components/links/CustomLink';
+import useScrollSpy from '@/hooks/useScrollSpy';
+
+import { headings } from '@/data/headings';
+
 import UnstyledLink from '@/components/links/UnstyledLink';
 import Seo from '@/components/Seo';
 
 export default function HomePage() {
+  const activeSection = useScrollSpy();
+
   return (
     <>
       <Seo templateTitle='Home' />
 
       <main>
-        <section className='bg-dark'>
-          <div className='flex flex-col items-center justify-center min-h-screen text-center text-white layout'>
-            <h1 className='text-2xl md:text-4xl'>
-              <CustomLink href='https://github.com/theodorusclarence/ts-nextjs-tailwind-starter'>
-                Next.js + Tailwind CSS + TypeScript Starter
-              </CustomLink>
-            </h1>
-            <p className='mt-2 text-sm text-gray-300'>
-              A starter for Next.js, Tailwind CSS, and TypeScript with Absolute
-              Import, Seo, Link component, pre-configured with Husky{' '}
-            </p>
-
-            <ButtonLink
-              className='mt-4'
-              href='/components'
-              variants='secondary'
-            >
-              See all components
-            </ButtonLink>
-
-            <UnstyledLink
-              href='https://vercel.com/new/git/external?repository-url=https%3A%2F%2Fgithub.com%2Ftheodorusclarence%2Fts-nextjs-tailwind-starter'
-              className='mt-4'
-            >
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                width='92'
-                height='32'
-                src='https://vercel.com/button'
-                alt='Deploy with Vercel'
-              />
-            </UnstyledLink>
-
-            <footer className='absolute text-gray-500 bottom-2'>
-              © {new Date().getFullYear()} By{' '}
-              <CustomLink href='https://theodorusclarence.com?ref=tsnextstarter'>
-                Theodorus Clarence
-              </CustomLink>
-            </footer>
+        <div className='bg-yellow-300 border p-2 inset-x-0 text-lg fixed top-0 text-center'>
+          {activeSection}
+        </div>
+        <section>
+          <div className='min-h-screen py-20 layout'>
+            {headings.map((h, i) => (
+              <div key={h.id} className={clsx('min-h-[70vh] mt-4 p-4', h.bg)}>
+                <h2 id={h.id}>
+                  <UnstyledLink className='hash-anchor' href={`/#${h.id}`}>
+                    #
+                  </UnstyledLink>{' '}
+                  Heading {i + 1}
+                </h2>
+                <p>
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+                  Ullam deleniti quis molestias cum? Adipisci modi nemo hic,
+                  similique est eveniet mollitia ea? Laudantium praesentium
+                  temporibus voluptatibus aperiam dolorum aliquid? Ratione?
+                </p>
+              </div>
+            ))}
+          </div>
+          <div className={clsx('min-h-[70vh] mt-4 p-4', 'bg-green-200')}>
+            <h2>footer</h2>
           </div>
         </section>
       </main>
